@@ -56,7 +56,7 @@ class Home extends Component {
         const { task, status, name } = this.state;
 
         if (task !== '') {
-            const response = await fetch('http://localhost:3100/task', {
+            const response = await fetch('https://to-do-full-stack-application-1.onrender.com/task', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: uuidv4(), task: task, status: status, username: name })
@@ -75,7 +75,7 @@ class Home extends Component {
 
     deleteTaskFunction = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3100/task/${id}?name=${encodeURIComponent(this.state.name)}`, {
+            const response = await fetch(https://to-do-full-stack-application-1.onrender.com/task/${id}?name=${encodeURIComponent(this.state.name)}`, {
                 method: 'DELETE',
             });
             console.log(response)
@@ -93,7 +93,7 @@ class Home extends Component {
     updateToDostatus = async (id) => {
         const newStatus = true
         try {
-            const response = await fetch(`http://localhost:3100/task/${id}?name=${encodeURIComponent(this.state.name)}`, {
+            const response = await fetch(`https://to-do-full-stack-application-1.onrender.com/task/${id}?name=${encodeURIComponent(this.state.name)}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })
@@ -112,7 +112,7 @@ class Home extends Component {
 
     getData = async () => {
         try {
-            const response = await fetch(`http://localhost:3100/userTasks?name=${encodeURIComponent(this.state.name)}`);
+            const response = await fetch(`https://to-do-full-stack-application-1.onrender.com/userTasks?name=${encodeURIComponent(this.state.name)}`);
             const data = await response.json();
             if (response.ok) {
                 this.setState({ list: data });
