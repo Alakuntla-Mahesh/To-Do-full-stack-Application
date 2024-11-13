@@ -23,7 +23,7 @@ class Login extends Component {
     onSubmitSuccess = (jwtToken, usernameFromBackend) => {
         Cookies.set('jwt_token', jwtToken, { expires: 30 });
         localStorage.setItem('username', usernameFromBackend);
-        this.setState({ redirectToHome: true }); // Set flag for redirect
+        this.setState({ redirectToHome: true });
     };
 
     onChaneEmail = (event) => { this.setState({ email1: event.target.value }) }
@@ -36,7 +36,7 @@ class Login extends Component {
         event.preventDefault();
         const { email1, password1, username } = this.state;
 
-        const response = await fetch('http://localhost:3100/signup', {
+        const response = await fetch('https://to-do-full-stack-application-1.onrender.com/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: uuidv4(), username: username, password: password1, email: email1 }),
@@ -55,7 +55,7 @@ class Login extends Component {
         event.preventDefault();
         const { email, password } = this.state;
 
-        const response = await fetch('http://localhost:3100/login', {
+        const response = await fetch('https://to-do-full-stack-application-1.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -118,7 +118,7 @@ class Login extends Component {
     render() {
         const { isLogin, redirectToHome } = this.state;
 
-        // Redirect to home page if redirectToHome is true
+       
         if (redirectToHome) {
             return <Navigate to="/" replace />;
         }
