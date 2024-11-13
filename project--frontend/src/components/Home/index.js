@@ -75,7 +75,7 @@ class Home extends Component {
 
     deleteTaskFunction = async (id) => {
         try {
-            const response = await fetch(https://to-do-full-stack-application-1.onrender.com/task/${id}?name=${encodeURIComponent(this.state.name)}`, {
+            const response = await fetch(`https://to-do-full-stack-application-1.onrender.com/task/${id}?name=${encodeURIComponent(this.state.name)}`, {
                 method: 'DELETE',
             });
             console.log(response)
