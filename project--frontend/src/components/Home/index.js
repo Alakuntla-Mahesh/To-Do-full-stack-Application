@@ -23,7 +23,7 @@ class Home extends Component {
         const username = localStorage.getItem('username');
         if (username) {
             this.setState({ name: username }, () => {
-                // Call `getData` after `name` has been set
+              
                 this.getData();
             });
         } else {
