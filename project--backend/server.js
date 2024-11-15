@@ -19,6 +19,16 @@ const initializeDBAndServer = async () => {
             filename: dbPath,
             driver: sqlite3.Database,
         });
+        const createUserInfoTableQuery = `
+            CREATE TABLE IF NOT EXISTS userInfo (
+                id TEXT PRIMARY KEY,
+                username TEXT,
+                email TEXT,
+                password TEXT
+            );
+        `;
+        await db.run(createUserInfoTableQuery);
+
         app.listen(3100, () => {
             console.log("Server Running at http://localhost:3100/");
         });
