@@ -60,6 +60,8 @@ app.post('/signup', async (req, res) => {
     if (dbUser === undefined) {
         const table = `create table '${username}'  (id text, task text, status boolean );`
         await db.run(table)
+    } else {
+        return res.status(400).send({ message: "User already exit" });
     }
     if (dbUser === undefined) {
         const insertLoginData = `
@@ -71,11 +73,10 @@ app.post('/signup', async (req, res) => {
         '${password}'
         );`;
         const dbResponse = await db.run(insertLoginData);
-        res.send({ message: 'Data received successfully' });
+
 
     } else {
-        res.status(400);
-        res.send("User Already Exit");
+        return res.status(400).send({ message: "User already exit" });
     }
 
 })
@@ -87,8 +88,7 @@ app.post('/login', async (req, res) => {
     const dbUser = await db.get(checkUsernameQuery);
 
     if (dbUser === undefined) {
-        res.status(400);
-        res.send("Invalid User");
+        return res.status(400).send({ message: "Invalid User" });
     } else {
 
         if (dbUser.password === password) {
@@ -98,13 +98,11 @@ app.post('/login', async (req, res) => {
             const jwtToken = jwt.sign(payload, "MY_SECRET_TOKEN");
             res.send({ jwtToken, username: dbUser.username });
         } else {
-            res.status(400);
-            res.send("Invalid Password");
+            return res.status(400).send({ message: "Invalid Password" });
         }
     }
 
 })
-
 app.post('/task', async (request, response) => {
     const data = request.body;
     const { id, task, status, username } = data;
