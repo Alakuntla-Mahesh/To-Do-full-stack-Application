@@ -36,16 +36,19 @@ class Login extends Component {
         event.preventDefault();
         const { email1, password1, username } = this.state;
 
-        const response = await fetch('https://to-do-full-stack-application-1.onrender.com/signup', {
+        const response = await fetch('https://to-do-full-stack-application-3.onrender.com/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: uuidv4(), username: username, password: password1, email: email1 }),
         });
+        const data=await response.json()
 
         if (response.ok) {
             this.setState({
                 username: "", email1: "", password1: "", newPhoneNumber: "", isLogin: true
             });
+        }else{
+            alert(data.message)
         }
     }
 
@@ -55,7 +58,7 @@ class Login extends Component {
         event.preventDefault();
         const { email, password } = this.state;
 
-        const response = await fetch('https://to-do-full-stack-application-1.onrender.com/login', {
+        const response = await fetch('https://to-do-full-stack-application-3.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -67,7 +70,7 @@ class Login extends Component {
             this.onSubmitSuccess(data.jwtToken, data.username);
 
         } else {
-            console.log("error");
+            alert(data.message)
         }
     };
 
